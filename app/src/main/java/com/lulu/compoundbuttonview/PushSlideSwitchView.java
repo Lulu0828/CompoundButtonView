@@ -1,6 +1,7 @@
 package com.lulu.compoundbuttonview;
 
 import android.content.Context;
+import android.content.SyncStatusObserver;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -55,11 +56,11 @@ public class PushSlideSwitchView extends View{
     private boolean mIsScrolled =false;
 
     public PushSlideSwitchView(Context context) {
-        super(context, null);
+        this(context, null);
     }
 
     public PushSlideSwitchView(Context context, AttributeSet attrs) {
-        super(context, attrs, 0);
+        this(context, attrs, 0);
     }
 
     public PushSlideSwitchView(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -137,7 +138,7 @@ public class PushSlideSwitchView extends View{
                 }
             } else {
                 canvas.drawBitmap(mSwitchBgSeleted, 0, 0, null);
-                canvas.drawBitmap(mSwitchBallSeleted, 0, mMoveLength, null);
+                canvas.drawBitmap(mSwitchBallSeleted, mMoveLength, 0, null);
             }
         }
 
@@ -170,7 +171,7 @@ public class PushSlideSwitchView extends View{
 
                 // 超出最大移动距离时，设置移动距离为最大移动距离
                 if (Math.abs(mMoveDeltX) > mMoveLength) {
-                    mMoveDeltX = mMoveDeltX > 0 ? mMoveLength : - mMoveLength;
+                    mMoveDeltX = mMoveDeltX > 0 ? - mMoveLength : mMoveLength;
                 }
 
                 invalidate();
